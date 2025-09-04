@@ -38,6 +38,27 @@ Optional but recommended:
 ```bash
 git clone <your-github-repo-url>
 cd aceest_fitness
+```
 
 ### 2. Create and Activate Virtual Environment
+# Windows
+python -m venv .venv
+.\.venv\Scripts\activate
 
+# macOS / Linux
+python3 -m venv .venv
+source .venv/bin/activate
+
+### 3. Install Dependencies
+pip install -r requirements.txt
+
+### 4. Run the Flask Application Locally
+python -m aceest_fitness.app
+
+### 5. Run the Application in Docker
+
+  # Build Docker image
+  docker build -t aceest_fitness:latest .
+
+  # Run Docker container
+  docker run -p 5000:5000 -e PYTHONPATH=/app aceest_fitness:latest
