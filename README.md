@@ -41,24 +41,54 @@ cd aceest_fitness
 ```
 
 ### 2. Create and Activate Virtual Environment
-# Windows
+#### Windows
+```bash 
 python -m venv .venv
 .\.venv\Scripts\activate
+```
 
-# macOS / Linux
+#### macOS / Linux
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
-
+``` 
 ### 3. Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
 ### 4. Run the Flask Application Locally
+```bash
 python -m aceest_fitness.app
+```
 
 ### 5. Run the Application in Docker
 
-  # Build Docker image
+  #### Build Docker image
+  ```bash
   docker build -t aceest_fitness:latest .
+  ```
 
-  # Run Docker container
+  #### Run Docker container
+  ```bash
   docker run -p 5000:5000 -e PYTHONPATH=/app aceest_fitness:latest
+  ```
+
+## Running Tests
+
+### 1. Running Tests Locally
+Make sure your virtual environment is active:
+```bash
+# Activate virtual environment (Windows)
+.venv\Scripts\activate
+
+# Activate virtual environment (Linux/macOS)
+source .venv/bin/activate
+
+```
+
+#### 1. Running Tests in Docker
+```bash
+docker run -it --rm -e PYTHONPATH=/app aceest_fitness:latest pytest -v
+```
+![alt text](image.png)
