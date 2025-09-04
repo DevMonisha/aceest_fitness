@@ -137,6 +137,11 @@ The pipeline first fetches the latest code from the repository.
 ##### Developers are notified immediately if the build or tests fail, ensuring early detection of issues.
 ![alt text](image-1.png)
 
+
+## successful runs for recent commits
+
+![alt text](image-2.png)
+
 ## Key Features
 
 ### Automated Testing: Prevents broken changes from being merged.
@@ -191,3 +196,33 @@ The pipeline first fetches the latest code from the repository.
 │ Deploy / Push │
 │ Docker Image  │
 └───────────────┘
+
+
+## Contributing
+
+### Steps for other developers to contribute:
+
+- **Fork repo**
+
+- **Create a feature branch**
+
+- **Run tests locally**
+
+- **Submit PR**
+
+
+## Technology Stack
+
+- **Python 3.11**
+
+- **Flask**
+
+- **Docker**
+
+- **pytest for testing**
+
+- **CI/CD with GitHub Actions**
+
+## License
+
+- **State the license type (MIT, Apache, etc.)**
