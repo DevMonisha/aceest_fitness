@@ -3,14 +3,16 @@ from flask import Flask, request, jsonify
 def create_app():
     app = Flask(__name__)
 
-    # In-memory store for workouts
     workouts = []
 
     @app.route("/")
     def home():
         return "Welcome to ACEest Fitness and Gym!", 200
 
-    # Members endpoint
+    @app.route("/health")
+    def health_check():
+        return jsonify({"status": "ok", "app": "ACEEST Fitness API"})
+
     @app.route("/members")
     def get_members():
         members = [
@@ -20,8 +22,6 @@ def create_app():
         ]
         return jsonify({"members": members})
 
-
-    # Trainers endpoint
     @app.route("/trainers")
     def get_trainers():
         trainers = [
@@ -30,20 +30,14 @@ def create_app():
         ]
         return jsonify({"trainers": trainers})
 
-
-    # Health stats endpoint
-    @app.route("/health")
-    def health_check():
-        return jsonify({"status": "ok", "app": "ACEEST Fitness API"})
-
     @app.route("/workouts", methods=["GET"])
     def get_workouts():
-        workouts = [
+        workouts_list = [
             {"id": 1, "title": "Full Body Workout", "duration": 60},
             {"id": 2, "title": "Cardio Blast", "duration": 30},
             {"id": 3, "title": "Yoga Flow", "duration": 45},
         ]
-        return jsonify({"workouts": workouts}), 200
+        return jsonify({"workouts": workouts_list}), 200
 
     @app.route("/workouts", methods=["POST"])
     def add_workout():
@@ -71,7 +65,7 @@ def create_app():
 
     return app
 
-
+# Only run if executed directly
 if __name__ == "__main__":
     app = create_app()
     app.run(host="0.0.0.0", port=5000)
