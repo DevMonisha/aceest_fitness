@@ -92,3 +92,102 @@ source .venv/bin/activate
 docker run -it --rm -e PYTHONPATH=/app aceest_fitness:latest pytest -v
 ```
 ![alt text](image.png)
+
+
+## CI/CD Pipeline Overview
+
+The project includes a fully automated CI/CD pipeline that ensures code quality, runs tests, and builds Docker images on every push or pull request. The pipeline is configured using GitHub Actions and performs the following steps:
+
+### Pipeline Steps
+
+#### 1.Checkout Code
+
+The pipeline first fetches the latest code from the repository.
+
+#### 2. Set Up Python Environment
+
+##### Installs the specified Python version (3.11) on the runner.
+
+##### Sets up a virtual environment to isolate dependencies.
+
+#### 3. Install Dependencies
+
+##### Installs project dependencies listed in requirements.txt.
+
+##### Ensures pip and Python packages are up to date.
+
+#### 4. Run Tests
+
+##### Executes all test cases using pytest.
+
+##### Provides detailed test reports including passed/failed test counts.
+
+##### Fails the pipeline if any test fails, preventing broken code from being merged.
+
+#### 5. Build Docker Image (Optional: for deployment)
+
+##### Builds a Docker image for the application using the Dockerfile.
+
+##### Tags the image for local testing or deployment to a container registry.
+
+#### 6. Continuous Feedback
+
+##### Status of the pipeline is displayed in the pull request or commit history.
+
+##### Developers are notified immediately if the build or tests fail, ensuring early detection of issues.
+![alt text](image-1.png)
+
+## Key Features
+
+### Automated Testing: Prevents broken changes from being merged.
+
+### Dockerized Environment: Ensures consistent environments across development, testing, and production.
+
+### Reproducible Builds: Each push triggers a fresh build, making deployments predictable.
+
+### Easy Integration: Fully compatible with GitHub Actions, allowing seamless CI/CD integration.
+
+           ┌───────────────┐
+           │  Push/PR to   │
+           │   GitHub      │
+           └───────┬───────┘
+                   │
+                   ▼
+           ┌───────────────┐
+           │ Checkout Code │
+           └───────┬───────┘
+                   │
+                   ▼
+           ┌───────────────┐
+           │ Setup Python  │
+           │  Environment  │
+           └───────┬───────┘
+                   │
+                   ▼
+           ┌───────────────┐
+           │ Install       │
+           │ Dependencies  │
+           └───────┬───────┘
+                   │
+                   ▼
+           ┌───────────────┐
+           │ Run Tests     │
+           │ (pytest)      │
+           └───────┬───────┘
+                   │
+       ┌───────────┴───────────┐
+       │                       │
+       ▼                       ▼
+  Tests Passed               Tests Failed
+       │                       │
+       ▼                       ▼
+┌───────────────┐       ┌───────────────┐
+│ Build Docker  │       │ Fail Pipeline │
+│ Image         │       │ & Notify Dev │
+└───────┬───────┘       └───────────────┘
+        │
+        ▼
+┌───────────────┐
+│ Deploy / Push │
+│ Docker Image  │
+└───────────────┘
